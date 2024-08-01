@@ -1,0 +1,189 @@
+@font-face {
+    font-family: 'semi';
+    src: url(./fonts/BarlowSemiCondensed-SemiBold.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'bold';
+    src: url(./fonts/BarlowSemiCondensed-Bold.ttf) format('truetype');
+}
+:root{
+    --body-background:radial-gradient(circle at top, 
+    #1d3454 0%, 
+    #1d3454 20%, 
+    #161f40 80%, 
+    #161f40 100%);
+}
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+}
+/*=====================start styling====================*/
+body{
+    background: var(--body-background);
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;   
+}
+header{
+    border: 3px solid hsl(217, 16%, 45%);
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-top: 3rem;
+}
+.score{
+    font-family: 'bold';
+    width: 8rem;
+    display: flex;
+    flex-direction: column;
+    background-color: hsl(0, 0%, 98%);
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 7.5px;
+}
+.score-text{
+    
+    font-size: 13px;
+    color: #3655f0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.score-counter{
+    font-size: 4rem;
+    color: #535066;
+}
+/*=================main styling================*/
+.inner-circle{
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: inset 0px 7px 1px 0px #b8bdd1;
+}
+.outer-circle{
+    width: 10.3rem;
+    height: 10.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #536ef5;
+    box-shadow: inset 0px -9px 1px 0px #2945c2;
+    position: relative;
+}
+.inner-circle:hover{
+    cursor: pointer;
+    transform: rotate(27deg);
+    transition: all 1s ease;
+}
+.large-icon {
+    font-size: 1rem;
+    width: 100%;
+    height: 23%;
+    overflow: initial;
+    position: relative;
+    right: 1.5rem;
+    bottom: 1.5rem;
+}
+body  div.outer-circle:nth-child(2){
+    background-color: #e8a920;
+    box-shadow: inset 0px -9px 1px 0px #c76c1c;
+    left: 10rem;
+    top: 3rem;
+}
+body  div.outer-circle:nth-child(4){
+    background-color: #de405d;
+    box-shadow: inset 0px -9px 1px 0px #991a33;
+    bottom: 3rem;
+    
+}
+main{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    margin-top: 2rem;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.triangle{
+    position: absolute;
+    transform: translateY(50%);
+}
+body > main > div > div:nth-child(3){
+    bottom: 7rem;
+    right: 9rem;
+}
+.rules{
+    right: 2rem;
+    align-self: flex-end;
+    font-family: 'semi';
+    color: rgba(255, 255, 255, 0.705);
+    text-transform: uppercase;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    border: 2px solid #535066;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    cursor: pointer;
+    position: absolute;  
+}
+body > main > div.container > div:nth-child(4) > div > svg{
+    right: 1rem;
+    bottom: 1rem;
+}
+/*===================step 1 media================*/
+@media screen and (max-width:768px) {
+
+    header{
+        width:75%;
+    }
+}
+@media screen and (max-width:425px) {
+    
+    body div.outer-circle:nth-child(2){
+        left: 6rem;
+        top:2rem
+    }
+    .outer-circle{
+        width: 9.3rem;
+        height: 9.3rem;
+    }
+    .inner-circle{
+        width: 7rem;
+        height: 7rem;
+    }
+    body > main > div > div:nth-child(3) {
+        bottom: 7rem;
+    right: 6rem;
+    }
+    body div.outer-circle:nth-child(4){
+        bottom: 5rem;
+    }
+    header{
+        width:95%;
+        padding: 1rem;
+    }
+    .triangle img{
+        width: 14rem;
+    }
+    .rules{
+        margin-bottom: 0;
+        margin-right: 0;
+        right: 8rem;
+    }
+}
