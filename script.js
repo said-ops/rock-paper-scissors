@@ -269,6 +269,7 @@ function playAgainHundle(){
     document.querySelector("body > main > div.result > div.show-result").style.display = 'none';
     //update the home view
     document.querySelector('main').innerHTML = homeView;
+    document.body.style.height = 'auto';
     attachEL();
     console.log('play again');
     //add event listners for the home icones 

@@ -322,3 +322,55 @@ body > main > div > div.house-pick > div.outer{
     margin-right: unset;
     margin-bottom: unset;
 }
+/*=====================step 2========================*/
+@media screen and (max-width:768px) {
+    .result{
+        flex-direction: column;
+        align-items: baseline;
+        margin-top: 3rem;
+    }
+    .rules2{
+        align-self: center;
+        transform:translateY(18rem);
+    }
+    .house-pick{
+        position: relative;
+        transform: translate(39rem, -28.5rem);
+    }
+    .user-pick{
+        transform: translate(2rem,0.1rem);
+    }
+    .show-result{
+        position: relative;
+    align-self: center;
+    transform: translate(0,3rem);
+    }
+    
+}
+@media screen and (max-width:425px) {
+    
+    .inner{
+        width: 9rem;
+        height: 9rem;
+    }
+    .outer{
+        width: 11.3rem;
+        height: 11.3rem;
+    }
+    .house-pick{
+        transform: translate(18rem, -25.6rem);
+    }
+    .placer{
+        transform: translateY(4rem);
+        width: 10rem;
+    height: 10rem;
+    }
+    .user-pick{
+        transform: translate(0.5rem,0.1rem);
+    }
+    .box-shadow{
+        box-shadow: 0 0 0 1rem rgb(255 255 255 / 10%),
+         0 0 0 2rem rgb(255 255 255 / 8%),
+          0 0 0 3rem rgb(255 254 254 / 6%);
+    }
+}
