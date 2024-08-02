@@ -4,6 +4,10 @@ const closeIcon = document.getElementById('close');
 const menu = document.querySelector('.menu');
 const overlay = document.querySelector('.overlay');
 const playAgain = document.getElementById('again'); 
+let score =parseInt(localStorage.getItem('userScore')) || 0;
+//set the score to 0 or saved score
+const scoreSpan = document.getElementById('score-counter');
+      scoreSpan.textContent = score;
 //function to open and close the rules menu
 function rulesHundle (){
     overlay.style.visibility = 'visible';
@@ -82,10 +86,15 @@ const rockSVG = `<svg class="large-icon" viewBox="0 0 24 24" xmlns="http://www.w
 function iconHundle(icon){
     //display user pick
     setTimeout(()=>{
+        //change vue
         document.querySelector('main').innerHTML=resultView;
         document.body.style.height = '100vh';
-        attachEL();
-
+        // attachEL();
+        const rules = document.getElementById('rules');
+        const closeIcon = document.getElementById('close');
+        rules.addEventListener('click',rulesHundle);
+        closeIcon.addEventListener('click',closeHundle);
+        //update the user pick
         if(icon.getAttribute('data-value') === 'scisors'){
             userPick('yellow',scisorSVG);
         }
@@ -139,18 +148,25 @@ function setHouseIcon(index){
             document.querySelector('.house-pick .outer').style.visibility = 'visible';
             document.querySelector('.house-pick .outer').classList.add('yellow');
             document.querySelector('.house-pick .outer .inner').innerHTML = scisorSVG;
+            console.log('setHouseIcon 1');
             break;
         case 2:
             document.querySelector('.house-pick .outer').style.visibility = 'visible';
             document.querySelector('.house-pick .outer').classList.add('blue');
             document.querySelector('.house-pick .outer .inner').innerHTML = paperSVG;
+            console.log('setHouseIcon 2');
             break;
         case 3:
             document.querySelector('.house-pick .outer').style.visibility = 'visible';
             document.querySelector('.house-pick .outer').classList.add('red');
             document.querySelector('.house-pick .outer .inner').innerHTML = rockSVG;
+            console.log('setHouseIcon 3');
             break;    
         default:
+            document.querySelector('.house-pick .outer').style.visibility = 'visible';
+            document.querySelector('.house-pick .outer').classList.add('yellow');
+            document.querySelector('.house-pick .outer .inner').innerHTML = scisorSVG;
+            console.log('setHouseIcon default');
             break;
     }
 }
@@ -160,15 +176,21 @@ function displayResult(index,icon){
     if(icon.getAttribute('data-value') === 'scisors'){
         switch (index) {
             case 1:
-                resultText('draw');    
+                resultText('draw'); 
+                console.log('displayResult scisors draw');   
                 break;
             case 2:
                 resultText('win');
+                setScore();
+                console.log('displayResult scisors win'); 
                 break;
             case 3:
-                resultText('lose');        
+                resultText('lose'); 
+                console.log('displayResult scisors lose');  
+                break;      
         
             default:
+                console.log('displayResult default');
                 break;
         }
     }
@@ -176,15 +198,21 @@ function displayResult(index,icon){
     if(icon.getAttribute('data-value') === 'paper'){
         switch (index) {
             case 1:
-                resultText('lose');    
+                resultText('lose'); 
+                console.log('displayResult paper lose');    
                 break;
             case 2:
                 resultText('draw');
+                console.log('displayResult paper draw'); 
                 break;
             case 3:
-                resultText('win');        
+                resultText('win'); 
+                console.log('displayResult paper win');
+                setScore();
+                break;       
         
             default:
+                console.log('displayResult paper default');
                 break;
         }
     }
@@ -192,15 +220,21 @@ function displayResult(index,icon){
     if(icon.getAttribute('data-value') === 'rock'){
         switch (index) {
             case 1:
-                resultText('win');    
+                resultText('win'); 
+                console.log('displayResult rock win'); 
+                setScore();  
                 break;
             case 2:
                 resultText('lose');
+                console.log('displayResult rock lose');
                 break;
             case 3:
-                resultText('draw');        
+                resultText('draw');  
+                console.log('displayResult rock draw');
+                break;      
         
             default:
+                console.log('displayResult rock default');
                 break;
         }
     }
@@ -216,24 +250,46 @@ function resultText(text){
         case 'lose':
             document.querySelector("body > main > div.result > div.show-result").style.display = 'flex';
             document.querySelector("#result-text").textContent = 'YOU LOSE';
-            document.querySelector("body > main > div.result > div.house-pick > div.outer").classList.add('box-shadow');
+            document.querySelector("body > main > div.result > div.house-pick  div.outer").classList.add('box-shadow');
             break; 
         case 'draw':
             document.querySelector("body > main > div.result > div.show-result").style.display = 'flex';
-            document.querySelector("#result-text").textContent = 'DRAW';      
+            document.querySelector("#result-text").textContent = 'DRAW'; 
+            break;     
         default:
             break;
     }
 }
 //play again hundle
 function playAgainHundle(){
+
+    //remove shadow box and hide the text result
+    document.querySelector("body > main > div.result > div.user-pick > div > div").classList.remove('box-shadow');
+    document.querySelector("body > main > div.result > div.house-pick  div.outer").classList.remove('box-shadow');
+    document.querySelector("body > main > div.result > div.show-result").style.display = 'none';
+    //update the home view
     document.querySelector('main').innerHTML = homeView;
     attachEL();
-    document.querySelectorAll('.inner-circle').forEach(ic => {
-        ic.addEventListener('click', ()=>{
-            iconHundle(ic); 
-        });
-    });   
+    console.log('play again');
+    //add event listners for the home icones 
+    // document.querySelectorAll('.inner-circle').forEach(ic => {
+    //     ic.addEventListener('click', ()=>{
+    //         iconHundle(ic); 
+    //     });
+    // });   
+}
+//set the score hundle
+function setScore(){
+    //set the score to saved score or 0;
+    const scoreSpan = document.getElementById('score-counter');
+    scoreSpan.textContent=score;
+    score++;
+    scoreSpan.textContent=score;
+    saveScore();
+}
+//save the score to local storage
+function saveScore(){
+    localStorage.setItem('userScore',score);
 }
 //scisors paper rock
 document.addEventListener('DOMContentLoaded',()=>{
